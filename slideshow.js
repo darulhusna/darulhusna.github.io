@@ -1,41 +1,31 @@
 // List of image filenames
 const imageList = [
-  "baner1.jpg",
-  "baner2.jpg",
-  "vaksin.jpg",
-  "baner3.jpg"
-  // Add all your image filenames here
+    "vaksin.jpg",
+    "baner3.jpg",
+    "baner4.jpg"
+    // Add all your image filenames here
 ];
 
 // Define the interval time in milliseconds (e.g., 12000 = 12 seconds)
 let slideshowInterval = 12000;
 
-function loadImages() {
-  const slideshow = document.getElementById('slideshow');
-  slideshow.innerHTML = ''; // Clear existing content
-
-  imageList.forEach(image => {
-      const div = document.createElement('div');
-      const img = document.createElement('img');
-      img.src = `content/${image}`;
-      img.alt = image;
-      // img.className = 'content-image';
-      img.setAttribute('style', 'object-fit: cover; width: 100%;');
-      div.appendChild(img);
-      slideshow.appendChild(div);
-  });
-
-  // Initialize the slideshow after images are loaded
-  initializeSlideshow();
-}
-
 function initializeSlideshow() {
     $("#slideshow > div:gt(0)").hide();
-    startSlideshow();
+    let interval = startSlideshow();
+    
+    // Store the interval ID so we can clear it later
+    return interval;
 }
 
+let currentInterval = null;
+
 function startSlideshow() {
-    return setInterval(function() {
+    // Clear any existing interval
+    if (currentInterval) {
+        clearInterval(currentInterval);
+    }
+    
+    currentInterval = setInterval(function() {
         $('#slideshow > div:first')
         .fadeOut("slow")
         .next()
@@ -43,6 +33,51 @@ function startSlideshow() {
         .end()
         .appendTo('#slideshow');
     }, slideshowInterval);
+    
+    return currentInterval;
+}
+
+function loadImages() {
+    const slideshow = document.getElementById('slideshow');
+    if (!slideshow) {
+        console.error('Slideshow element not found!');
+        return;
+    }
+    
+    slideshow.innerHTML = '';
+    console.log(`Loading ${imageList.length} images...`);
+
+    let loadedImages = 0;
+    
+    imageList.forEach((image, index) => {
+        const div = document.createElement('div');
+        const img = document.createElement('img');
+        img.src = `content/${image}`;
+        img.alt = image;
+        img.setAttribute('style', 'object-fit: cover; width: 100%;');
+        
+        img.onload = () => {
+            console.log(`Successfully loaded image ${index + 1}: ${image}`);
+            loadedImages++;
+            
+            // Initialize slideshow only after all images are loaded
+            if (loadedImages === imageList.length) {
+                console.log('All images loaded, initializing slideshow...');
+                // Clear any existing slideshow before initializing
+                if (currentInterval) {
+                    clearInterval(currentInterval);
+                }
+                initializeSlideshow();
+            }
+        };
+        
+        img.onerror = () => {
+            console.error(`Failed to load image: content/${image}`);
+        };
+
+        div.appendChild(img);
+        slideshow.appendChild(div);
+    });
 }
 
 // Remove the duplicate code and replace with proper initialization
@@ -161,7 +196,6 @@ $(function() {
 
 // Load images when the page loads
 document.addEventListener('DOMContentLoaded', loadImages);
-
 function updateCountdown() {
     const now = new Date();
     let nearestPrayer = null;
@@ -215,3 +249,4 @@ function handleFullscreenChange() {
         fullscreenBtn.style.display = 'block';
     }
 }
+
