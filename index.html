@@ -1,0 +1,234 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Show</title>
+    <link href="assets/aws/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/admin/plugins/fontawesome-free/css/all.min.css">
+    <style>
+      /*********************************
+        Fonts Start
+        *********************************/
+      @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
+      @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,700i,800');
+      @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i');
+      @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300i,400,400i,700');
+      @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+
+      @font-face {
+        font-family: 'droidSans';
+        src: url('../webfonts/DroidSans-webfont.eot');
+        src: url('../webfonts/DroidSans-webfontd41d.eot?#iefix') format('embedded-opentype'), url('../webfonts/droidsans-webfont.woff2') format('woff2'), url('../webfonts/DroidSans-webfont.woff') format('woff'), url('../webfonts/DroidSans-webfont.ttf') format('truetype'), url('../webfonts/DroidSans-webfont.svg#droid_sansregular') format('svg');
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: 'droidSans';
+        src: url('../webfonts/DroidSans-Bold-webfont.eot');
+        src: url('../webfonts/DroidSans-Bold-webfontd41d.eot?#iefix') format('embedded-opentype'), url('../webfonts/droidsans-bold-webfont.woff2') format('woff2'), url('../webfonts/DroidSans-Bold-webfont.html') format('woff'), url('../webfonts/DroidSans-Bold-webfont-2.html') format('truetype'), url('../webfonts/DroidSans-Bold-webfont.svg#droid_sansbold') format('svg');
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      /*********************************
+        Fonts End
+        *********************************/
+      .slides {
+        display: flex;
+        scroll-snap-type: x mandatory;
+        height: 66%;
+        background-color: #254d24;
+      }
+
+      .body {
+        background-color: #112b13;
+      }
+
+      .font {
+        font-family: 'Poppins', sans-serif;
+        /* font-family: 'Roboto Slab'; */
+        /* font-family: 'droidSans'; */
+        /* font-family: 'Roboto', sans-serif; */
+        /* font-family: 'Roboto Condensed', sans-serif; */
+      }
+
+      .slides>div {
+        display: flex;
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: start;
+        scroll-behavior: smooth;
+        background: white;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+      }
+
+      #statis {
+        background-color: white;
+        height: 15%;
+        /*padding: 10px; */
+      }
+
+      #topslide {
+        background-color: white;
+        height: 14%;
+      }
+
+      /* .img-slide {
+            max-width: 75%;
+        } */
+      .container1 {
+        float: left;
+        position: relative;
+        width: 35%;
+      }
+
+      .container2 {
+        float: left;
+        position: relative;
+        width: 65%;
+      }
+
+      .image {
+        float: left;
+      }
+
+      .title {
+        font-size: 20px;
+        position: absolute;
+        left: 30px;
+      }
+
+      .title2 {
+        font-size: 20px;
+        position: absolute;
+        left: 65px;
+      }
+    </style>
+  </head>
+  <body class="body">
+    <div id="fullscreen" class="font">
+      <div id="topslide" class="text-center" style="z-index: 1; position: relative;">
+        <div class="row text-center" style="color: black; background-color: white">
+          <!-- <div style="width: 11%; background-color: white;"> -->
+          <div class="col-2" style="background-color: white; text-align: right;">
+            <div class="mt-3 mb-3">
+              <img src="assets/upload/image/logo.png" alt="Masjid Darul Husna" style="max-height: 80px; width: auto;">
+            </div>
+          </div>
+          <!-- <div style="width: 63%; background-color: white;"> -->
+          <div class="col-7" style="background-color: white;">
+            <div class="mt-3 mb-3 mr-auto text-left">
+              <h1>
+                <b>Masjid Darul Husna Warungboto</b>
+              </h1>
+              <h5>Jl. Veteran No. 148, Warungboto, Umbulharjo, Yogyakarta</h5>
+            </div>
+          </div>
+          <!-- <div style="width: 26%; background-color: #10ac84;"> -->
+          <div class="col-3" style="background-color: #254d24;">
+            <div class="mt-3 mr-auto" style="color: white;">
+              <h1>
+                <b style="font-size:40px" id="time">21:42:21</b>
+              </h1>
+              <h4 id="date">Senin, 14 Oktober 2024</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slides" id="slideshow">
+        <div id="image-container"></div>
+      </div>
+      <div id="statis" class="" onclick="exitFullscreen();">
+        <div class="row text-left" style="color: white">
+          <div class="col-6" style="background-color: #576574;">
+            <div class="mt-2 mb-2 mr-auto" style="text-align: center;">
+              <!-- <h4>Saldo Infak: <b style="color: #feca57;" id="infaq"></b> | Saldo Beras: <b style="color: #feca57;" id="beras"></b></h4> -->
+              <h4><b style="color: #feca57;" id="countdown"></b> Menuju <span id="prayer-name"></span></h4>
+            </div>
+          </div>
+          <div class="col-6" style="background-color: #222f3e">
+            <div class="m-2 mr-auto">
+              <div class="container1">
+                <div class="image">
+                  <img width="25px" src="assets/upload/image/instagram.png">
+                </div>
+                <div class="title">
+                  <p>masjiddarulhusna</p>
+                </div>
+              </div>
+              <div class="container2">
+                <div class="image">
+                  <img width="25px" src="assets/upload/image/facebook.png">
+                  <img width="35px" src="assets/upload/image/youtube.png">
+                </div>
+                <div class="title2">
+                  <p>Masjid Darul Husna Warungboto</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center" style="color: white">
+          <div class="col" style="background-color: #01a3a4">
+            <div class="m-2 mr-auto">
+              <h2>Imsyak</h2>
+              <h1>
+                <b id="Imsak"></b>
+              </h1>
+            </div>
+          </div>
+          <div class="col" style="background-color: #50944e">
+            <div class="m-2 mr-auto">
+              <h2>Subuh</h2>
+              <h1>
+                <b id="Fajr"></b>
+              </h1>
+            </div>
+          </div>
+          <div class="col" style="background-color: #254d24">
+            <div class="m-2 mr-auto">
+              <h2>Dzuhur</h2>
+              <h1>
+                <b id="Dhuhr"></b>
+              </h1>
+            </div>
+          </div>
+          <div class="col" style="background-color: #01a3a4">
+            <div class="m-2 mr-auto">
+              <h2>Ashar</h2>
+              <h1>
+                <b id="Asr"></b>
+              </h1>
+            </div>
+          </div>
+          <div class="col" style="background-color: #50944e">
+            <div class="m-2 mr-auto">
+              <h2>Maghrib</h2>
+              <h1>
+                <b id="Maghrib"></b>
+              </h1>
+            </div>
+          </div>
+          <div class="col" style="background-color: #254d24">
+            <div class="m-2 mr-auto">
+              <h2>Isya</h2>
+              <h1>
+                <b id="Isha"></b>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <button onclick="openFullscreen();">Fullscreen Mode</button> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="slideshow.js"></script>
+  </body>
+</html>
