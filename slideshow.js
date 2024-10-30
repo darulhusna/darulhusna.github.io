@@ -160,7 +160,16 @@ function updatePrayerTimes() {
               Maghrib: data.data.timings.Maghrib,
               Isha: data.data.timings.Isha
             };
-            displayPrayerTimes();
+
+            // Adjust prayer times
+            updatePrayerTime('Imsak', prayerTimes.Imsak, 2);
+            updatePrayerTime('Fajr', prayerTimes.Fajr, 2);
+            updatePrayerTime('Dhuhr', prayerTimes.Dhuhr, 2);
+            updatePrayerTime('Asr', prayerTimes.Asr, 1);
+            updatePrayerTime('Maghrib', prayerTimes.Maghrib, 2);
+            updatePrayerTime('Isha', prayerTimes.Isha, 2);
+
+            // displayPrayerTimes();
             console.log("Prayer times updated:", prayerTimes);
           } else {
             console.error("Unexpected response structure:", data);
