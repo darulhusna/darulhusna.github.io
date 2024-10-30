@@ -98,4 +98,61 @@
   font-size: 20px;
   position: absolute;
   left: 65px;
-} 
+}
+
+.fullscreen-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.3s;
+}
+
+.fullscreen-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Hide scrollbars when in fullscreen */
+:fullscreen {
+    overflow: hidden !important;
+}
+
+/* Vendor prefixes for different browsers */
+:-webkit-full-screen {
+    overflow: hidden !important;
+}
+
+:-moz-full-screen {
+    overflow: hidden !important;
+}
+
+:-ms-fullscreen {
+    overflow: hidden !important;
+}
+
+/* Also hide scrollbars on the html and body when in fullscreen */
+:fullscreen body,
+:fullscreen html {
+    overflow: hidden !important;
+}
+
+:-webkit-full-screen body,
+:-webkit-full-screen html {
+    overflow: hidden !important;
+}
+
+:-moz-full-screen body,
+:-moz-full-screen html {
+    overflow: hidden !important;
+}
+
+:-ms-fullscreen body,
+:-ms-fullscreen html {
+    overflow: hidden !important;
+}
