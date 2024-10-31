@@ -106,6 +106,17 @@ function openFullscreen() {
     } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
     }
+    
+    // Add scaling calculation
+    setTimeout(() => {
+        const screenWidth = window.screen.width;
+        const screenHeight = window.screen.height;
+        const scale = Math.min(screenWidth/1366, screenHeight/768);
+        
+        elem.style.transform = `scale(${scale})`;
+        elem.style.transformOrigin = 'top left';
+    }, 100);
+    
     // Hide the button
     fullscreenBtn.style.display = 'none';
 }
@@ -118,10 +129,10 @@ function exitFullscreen() {
 var timestamp = '1728916672';
 
 function updateTime() {
-    MyDate = new Date(Date(timestamp));
-    formatedTime = format_time(MyDate);
+    let MyDate = new Date(Date(timestamp));
+    let formatedTime = format_time(MyDate);
     $('#time').html(formatedTime);
-    formatedDate = format_date(MyDate);
+    let formatedDate = format_date(MyDate);
     $('#date').html(formatedDate);
     timestamp++;
 }
@@ -255,6 +266,9 @@ function handleFullscreenChange() {
         !document.webkitFullscreenElement && 
         !document.mozFullScreenElement && 
         !document.msFullscreenElement) {
+        // Reset transform when exiting fullscreen
+        elem.style.transform = 'none';
+        elem.style.transformOrigin = 'initial';
         // Show the button when exiting fullscreen
         fullscreenBtn.style.display = 'block';
     }

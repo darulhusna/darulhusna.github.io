@@ -156,3 +156,40 @@
 :-ms-fullscreen html {
     overflow: hidden !important;
 }
+
+/* Add these to your existing styles */
+:fullscreen {
+    width: 1366px !important;
+    height: 768px !important;
+    transform: scale(1);
+    transform-origin: top left;
+}
+
+:-webkit-full-screen {
+    width: 1366px !important;
+    height: 768px !important;
+    transform: scale(1);
+    transform-origin: top left;
+}
+
+:-moz-full-screen {
+    width: 1366px !important;
+    height: 768px !important;
+    transform: scale(1);
+    transform-origin: top left;
+}
+
+:-ms-fullscreen {
+    width: 1366px !important;
+    height: 768px !important;
+    transform: scale(1);
+    transform-origin: top left;
+}
+
+#fullscreen {
+    width: 1366px;
+    height: 768px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
