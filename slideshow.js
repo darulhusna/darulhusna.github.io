@@ -3,7 +3,9 @@ const imageList = [
     "vaksin.jpg",
     "baner3.jpg",
     "baner4.jpg",
-    "baner5.jpg"
+    "baner5.jpg",
+    "jamaah.jpg",
+    "tadarus.jpg"
     // Add all your image filenames here
 ];
 
