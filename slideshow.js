@@ -1,6 +1,8 @@
 // List of image filenames
 const imageList = [
-    "LAPORAN KEUANGAN MASJID DARUL HUSNA WARUNGBOTO.jpg"
+    "Laporan.jpg",
+    "Jamaah.jpg",
+    "Tadarus.jpg"
     // Add all your image filenames here
 ];
 
