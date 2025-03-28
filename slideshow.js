@@ -1,7 +1,7 @@
 // List of image filenames
 const imageList = [
     "Zakat.jpg",
-    "laporan.jpg"
+    "laporan2818.jpg"
     // Add all your image filenames here
 ];
 
