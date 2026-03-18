@@ -1,7 +1,8 @@
 // List of image filenames
 const imageList = [
-    "ied.jpg",
-    "ieddua.jpg"
+    "zakatfix.jpg",
+    "update18.jpg",
+    "ied.jpg"
     // Add all your image filenames here
 ];
 
